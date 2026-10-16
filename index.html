@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FortNite Web 3D — Battle Royale com Bots</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔫</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="game-container"></div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div id="crosshair"><div class="dot"></div></div>
+  <div id="hitmarker"></div>
+  <div id="dmg-indicator"></div>
+  <div id="top-bar">
+    <div id="alive-box">👥 <span id="alive">20</span> vivos</div>
+    <div id="zone-timer">⌀ <span id="zone-text">Aguarde a storm</span></div>
+    <div id="kills-box">☠️ <span id="kills">0</span> kills</div>
+    <div id="fps-box" title="Meta: 40 FPS">⚡ <span id="fps">60</span> FPS</div>
+  </div>
+  <div id="killfeed"></div>
+  <canvas id="minimap" width="160" height="160"></canvas>
+  <div id="bottom-hud">
+    <div id="slots">
+      <div class="slot active" id="slot-1"><span class="slot-num">1</span><span class="slot-name">🔫 Rifle</span><span class="slot-ammo" id="ammo-1">30</span></div>
+      <div class="slot" id="slot-2"><span class="slot-num">2</span><span class="slot-name">💥 Shotgun</span><span class="slot-ammo" id="ammo-2">6</span></div>
+      <div class="slot" id="slot-3"><span class="slot-num">3</span><span class="slot-name">⛏️ Picareta</span><span class="slot-ammo">∞</span></div>
+    </div>
+    <div id="bars">
+      <div id="shield-bar"><div id="shield-fill"></div><span id="shield-text">50</span></div>
+      <div id="hp-bar"><div id="hp-fill"></div><span id="hp-text">100</span></div>
+      <div id="mats">🧱 <span id="mat-wood">200</span> &nbsp;🪨 <span id="mat-brick">100</span> &nbsp;🔩 <span id="mat-metal">50</span></div>
+    </div>
+  </div>
+  <div id="build-hint">[Q] Parede &nbsp; [E] Rampa &nbsp; [R] Recarregar &nbsp; [Shift] Correr &nbsp; [Espaço] Pular/Planar</div>
+  <div id="storm-warning" class="hidden">⚠️ VOCÊ ESTÁ NA STORM! VOLTE PARA O CÍRCULO! ⚠️</div>
+  <div id="bus-hint" class="hidden">Pressione <b>ESPAÇO</b> para SALTAR DO ÔNIBUS! 🚌</div>
+  <div id="reload-tip" class="hidden">RECARREGANDO...</div>
+</div>
+
+<!-- Menu inicial -->
+<div id="menu">
+  <div class="menu-card">
+    <h1>🔫 FORT<span>NITE</span> WEB 3D</h1>
+    <p class="subtitle">Battle Royale com 19 BOTS • Meta 40 FPS • Desktop</p>
+    <div class="features">
+      <div>🗺️ Mapa 500×500 com cidade, floresta e lago</div>
+      <div>🤖 19 bots com IA (loot, zona, trocação, construção)</div>
+      <div>🧱 Construção estilo Fortnite (parede + rampa)</div>
+      <div>⌀ Storm com 5 fases + 🚌 Ônibus de batalha</div>
+    </div>
+    <div class="controls-grid">
+      <div><b>WASD</b> mover</div><div><b>Mouse</b> mirar / <b>Click</b> atirar</div>
+      <div><b>1/2/3</b> armas</div><div><b>Q/E</b> construir</div>
+      <div><b>R</b> recarregar</div><div><b>Shift/Espaço</b> correr/pular</div>
+    </div>
+    <div class="quality-row">
+      <label>Qualidade:</label>
+      <button class="q-btn active" data-q="auto">⚡ AUTO (40 FPS)</button>
+      <button class="q-btn" data-q="low">🥔 Baixa</button>
+      <button class="q-btn" data-q="high">✨ Alta</button>
+    </div>
+    <button id="play-btn">▶ JOGAR — CAIR DO ÔNIBUS</button>
+    <p class="tip">Dica: caia na CIDADE para loot lendário. Headshot dá +50% de dano!</p>
+  </div>
+</div>
+
+<!-- Tela de morte / vitória -->
+<div id="end-screen" class="hidden">
+  <div class="menu-card">
+    <h1 id="end-title">#1 VICTORY ROYALE!</h1>
+    <p id="end-sub" class="subtitle"></p>
+    <div id="end-stats"></div>
+    <button id="again-btn">🔄 JOGAR NOVAMENTE</button>
+  </div>
+</div>
+
+<div id="damage-vignette"></div>
+<div id="loading">Carregando mapa...</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module" src="game.js"></script>
+</body>
+</html>
